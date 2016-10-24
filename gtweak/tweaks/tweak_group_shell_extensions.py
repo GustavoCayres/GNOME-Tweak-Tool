@@ -111,6 +111,10 @@ class _ShellExtensionTweak(Gtk.ListBoxRow, Tweak):
             btn.get_style_context().add_class("suggested-action")
             btn.set_sensitive(True)
             btn.connect("clicked", self._on_extension_delete, uuid, ext["name"])
+        elif ext.get("type") == GnomeShell.EXTENSION_TYPE["SYSTEM"]:
+            message = Gtk.MessageDialog(type=Gtk.MESSAGE_ERROR, buttons=Gtk.BUTTONS_OK)
+            message.set_markup("An example error popup.")
+            btn.connect("enter-notify-event", message.run)
         self.deleteButton = btn
 
         de = DisableExtension()
